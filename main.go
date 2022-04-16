@@ -1,7 +1,20 @@
 package main
 
-import "fmt"
+import
+(
+	"log"
+	"net/http"
 
-func main() {
-	fmt.Println("Welcome to NK fantasy football api")
+	"github.com/gorilla/mux"
+	"github.com/FantasyApi/routers/handlers"
+	"github.com/FantasyApi/conn"
+)
+
+func main()  {
+	DB := conn.Conn()
+	h := handlers.New(DB)
+	router  := mux.NewRouter()
+
+
+	router.HandleFunc("/createuser", h.CreateUser).Methods("POST")
 }
